@@ -29,9 +29,9 @@ console.log('will read file!')*/
 ///////////////////////////////////////////////////////
 //SERVER
 ///////////////////////////////////////////////////////
-http = require('http');
-url = require('url');
-fs = require('fs');
+const http = require('http');
+const url = require('url');
+const fs = require('fs');
 replaceTemplate = require('./modules/replaceTemplate')
 
 const tempOverView = fs.readFileSync(`${__dirname}/templates/template-overview.html`, 'utf-8');
