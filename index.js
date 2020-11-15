@@ -30,7 +30,11 @@ console.log('will read file!')*/
 //SERVER
 ///////////////////////////////////////////////////////
 http = require('http');
-url = require('url')
+url = require('url');
+fs = require('fs');
+
+const data = fs.readFileSync(`${__dirname}/dev-data/data.json`, 'utf-8');
+const dataObj = JSON.parse(data);
 
 const server = http.createServer((req, res) => {
     const pathName = req.url;
@@ -43,6 +47,12 @@ const server = http.createServer((req, res) => {
         case '/product':
             res.end('This is the porduct');
             break;
+        case '/api':
+            res.writeHead(200, {
+                'Content-Type': 'application/json'
+            })
+            res.end(data);
+            break;
         default:
             res.writeHead(404, {
                 'Content-type': 'text/html',
@@ -50,8 +60,6 @@ const server = http.createServer((req, res) => {
             });
             res.end('<h1>Page not found!</h1>');
     }
-
-    res.end('Hello from the server!');
 });
 
 server.listen(8000, 'localhost', ()=>{
